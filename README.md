@@ -17,3 +17,7 @@ Source: https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
 
 ## Data Model
 ![Data Model](dashboard/screenshots/model_view.png)
+
+## Data Quality
+Before analysis, I inspected all 9 tables for nulls, duplicates, key issues and cross-table mismatches.
+See the full [Data Quality Log](docs/data_quality_log.md).
