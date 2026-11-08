@@ -98,8 +98,18 @@ Order-level `price + freight_value` matches `payment_value` on sample orders (ex
 
 ## Cleaning checklist
 
-- [ ] Convert date columns in orders, items, reviews
-- [ ] Create `delivery_days`, `delay_days`, `is_late` for delivered orders
-- [ ] Keep one review per order
+## Cleaning checklist
+
+- [x] Convert date columns in orders, items, reviews
+- [x] Create `delivery_days`, `delay_days`, `is_late` for delivered orders
+- [x] Keep one review per order
 - [ ] Zip codes to 5-digit text
 - [ ] Add 2 rows to translation; rename `lenght` columns
+
+## Definitions used in cleaning
+
+- `delivery_days` = delivered date minus purchase date, in whole days.
+- `delay_days` = delivered date minus estimated date. Negative means early.
+- `is_late` = `delay_days > 0`; left empty for undelivered orders.
+- Delay analysis sample: 96,470 delivered orders; 95,824 after joining reviews.
+- `delivery_days` is right-skewed (mean 12.1, median 10, max 209). Extreme orders kept; median reported alongside the mean.
