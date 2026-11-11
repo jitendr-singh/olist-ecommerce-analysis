@@ -34,7 +34,8 @@ Inspection of the 9 Olist tables in Python (Pandas) before cleaning. For each ta
 | `order_delivered_customer_date` null | 2,965 (2,957 undelivered, 8 delivered) | Delay cannot be computed | Analyse delay only on delivered orders with a date |
 | `order_approved_at` null | 160 (14 delivered) | Not used in analysis | Keep |
 | `order_delivered_carrier_date` null | 1,783 (2 delivered) | Not used in analysis | Keep |
-
+| Orders end in Aug 2018: Sep (16) and Oct (4) 2018 orders are all canceled or shipped, none delivered | 20 | Analysis window is Sep 2016 to Aug 2018; recent customers have less time to return, so retention is read by cohort |
+| 2016 has only 3 sparse months (Sep, Oct, Dec); Nov 2016 is missing | - | Monthly growth is calculated from Jan 2017 |
 `order_id` is unique. No duplicate rows. 97% of orders are delivered (96,478).
 
 ## order_items
@@ -103,8 +104,8 @@ Order-level `price + freight_value` matches `payment_value` on sample orders (ex
 - [x] Convert date columns in orders, items, reviews
 - [x] Create `delivery_days`, `delay_days`, `is_late` for delivered orders
 - [x] Keep one review per order
-- [ ] Zip codes to 5-digit text
-- [ ] Add 2 rows to translation; rename `lenght` columns
+- [x] Zip codes to 5-digit text (applied when loading customers and sellers into MySQL)
+- [x] Add 2 missing rows to translation; rename `lenght` columns (applied when loading into MySQL)
 
 ## Definitions used in cleaning
 
