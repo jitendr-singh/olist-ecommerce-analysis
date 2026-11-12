@@ -99,8 +99,6 @@ Order-level `price + freight_value` matches `payment_value` on sample orders (ex
 
 ## Cleaning checklist
 
-## Cleaning checklist
-
 - [x] Convert date columns in orders, items, reviews
 - [x] Create `delivery_days`, `delay_days`, `is_late` for delivered orders
 - [x] Keep one review per order
@@ -114,3 +112,9 @@ Order-level `price + freight_value` matches `payment_value` on sample orders (ex
 - `is_late` = `delay_days > 0`; left empty for undelivered orders.
 - Delay analysis sample: 96,470 delivered orders; 95,824 after joining reviews.
 - `delivery_days` is right-skewed (mean 12.1, median 10, max 209). Extreme orders kept; median reported alongside the mean.
+
+## Cross-checks between SQL and Pandas
+
+- Delivered orders: 96,478 in MySQL, matching the Pandas inspection.
+- State-level order counts differ by 8 between the revenue query (96,478) and the delivery query (96,470): these are the 8 delivered orders with no delivery date.
+- Revenue is always summed from `order_items`, never from `order_payments`, to avoid double counting orders with several payment rows.

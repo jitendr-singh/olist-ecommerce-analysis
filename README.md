@@ -17,15 +17,16 @@ Work in progress.
 
 - [x] Data model and inspection of all 9 tables
 - [x] Data cleaning and delivery features
-- [x] SQL analysis (revenue, monthly trend, growth)
-- [ ] SQL analysis (categories, states, sellers, retention)
+- [x] SQL analysis (11 business queries)
 - [ ] RFM customer segmentation
 - [ ] Power BI dashboard
 - [ ] Final recommendations
 
 ## Key findings so far
 
-**Delivery delay vs review score** (95,824 delivered orders with a review)
+All numbers are for delivered orders (Sep 2016 to Aug 2018) unless stated otherwise.
+
+**1. Late delivery is linked to bad reviews** (95,824 delivered orders with a review)
 
 | Delivery | Orders | Avg review score | 1-star reviews |
 |---|---|---|---|
@@ -36,16 +37,25 @@ Work in progress.
 
 - Late orders are 6.7% of reviewed deliveries but account for 36.7% of all 1-star reviews.
 - This is a correlation. Other causes, such as wrong or missing items, also drive low scores.
+- Rio de Janeiro (2nd largest state by revenue) has 12.1% late orders, against 4.5% in São Paulo.
 
-**Revenue** (delivered orders only)
+**2. Revenue grew fast in 2017 and then flattened**
 
 - 96,478 orders generated 13.22M BRL in product revenue; average order value is 137.04 BRL.
 - Revenue peaked in November 2017 (988K BRL).
-- Jan-Aug 2018 revenue was 2.4x Jan-Aug 2017, but monthly revenue stayed flat between 840K and 980K after March 2018.
+- Jan-Aug 2018 revenue was 2.4x Jan-Aug 2017, but monthly revenue stayed between 840K and 980K after March 2018.
 
-**Retention (preliminary)**
+**3. Revenue is concentrated by category and state, but not by seller**
 
-- 2,149 of 96,096 customers (2.2%) bought on more than one day. This still includes canceled orders and will be recalculated on delivered orders.
+- The top 10 product categories generate 62.4% of revenue. health_beauty leads (1.23M BRL); watches_gifts is 2nd with fewer orders because its average product price per order is about 212 BRL.
+- Three states (SP, RJ, MG) generate 63.3% of revenue; SP alone is 38.3%.
+- Sellers are spread out: of 2,970 sellers with delivered sales, the largest brings 1.7% of revenue and the top 10 together 13.3%.
+
+**4. Almost no customer comes back**
+
+- Only 2.16% of customers (2,015 of 93,358) bought on more than one day.
+- Cohort view: 1.3% of customers returned within 90 days of their first purchase (976 of 75,123, cohorts Jan 2017 to May 2018). The rate stayed flat even when cohorts grew 10x, so growth came from new customers, not from returning ones.
+- Limit: orders on the same day count as one visit, and data ends in Aug 2018, so recent customers had less time to return.
 
 ## Tools
 
@@ -59,7 +69,7 @@ Python (Pandas), MySQL, SQL (JOINs, CTEs, window functions), Power BI
 │   ├── data_cleaning.ipynb      # dates, delivery features, one review per order, delay vs review
 │   └── load_to_mysql.ipynb      # loads cleaned data into MySQL
 ├── sql/
-│   └── analysis_queries.sql     # business queries with comments
+│   └── analysis_queries.sql     # 11 business queries with comments
 ├── docs/
 │   └── data_quality_log.md      # issues found and how they are handled
 └── dashboard/screenshots/
